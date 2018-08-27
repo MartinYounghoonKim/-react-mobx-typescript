@@ -11,7 +11,7 @@ import { inject, observer } from 'mobx-react';
 class App extends Component {
     test (e) {
         e.preventDefault();
-        const value = this.todo;
+        const value = this.todo.value;
         this.props.TodoStore.addTodos(value);
         this.todo.value = '';
      }
@@ -24,6 +24,11 @@ class App extends Component {
                     <input type="text" placeholder="입력하세요" ref={inputElement => this.todo = inputElement}/>
                 </form>
                 <button type="button" onClick={this.test}>버튼</button>
+                    <ul>
+                        {TodoStore.todos.map(todo => (
+                            <li key={todo.index}>{todo}</li>
+                        ))}
+                    </ul>
                 <Header/>
                 <TodoList/>
                 <Footer/>
