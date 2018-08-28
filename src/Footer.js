@@ -1,11 +1,17 @@
 import React from 'react'
+import { inject, observer } from 'mobx-react';
 
+@inject('TodoStore')
+@observer
 export default class Footer extends React.Component {
     render() {
+        const {
+            TodoStore
+        } = this.props;
         return (
             <footer className="footer">
                 <span className="todo-count">
-                  <strong>0</strong>
+                  <strong>{TodoStore.todoCount}</strong>
                     <span>item</span>
                     left
                 </span>

@@ -3,8 +3,10 @@ import { observable, action, computed } from 'mobx';
 class TodoStore {
     @observable todos = [];
 
-    @action addTodos = (todo) => {
-        this.todos.push(todo);
+    @action addTodos = (text) => {
+        const id = new Date().getTime();
+        const isDone = false;
+        this.todos.push({ id, text, isDone });
     };
 
     @computed get todoCount () {
