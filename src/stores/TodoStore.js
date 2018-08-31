@@ -8,6 +8,13 @@ class TodoStore {
         const isDone = false;
         this.todos.push({ id, text, isDone });
     };
+    @action toggle = (id) => {
+        this.todos.map(v => {
+            if (v.id === id) {
+                v.isDone = !v.isDone;
+            }
+        });
+    };
 
     @computed get todoCount () {
         return this.todos.length;

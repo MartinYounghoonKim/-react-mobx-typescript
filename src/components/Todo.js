@@ -5,11 +5,12 @@ import { observer, inject } from 'mobx-react';
 @inject('TodoStore')
 @observer
 export default class Todo extends React.Component {
-    toggle = () => {
-        console.log(123);
+    toggle = (targetId) => {
+        this.props.TodoStore.toggle(targetId);
     };
     render () {
         const {
+            id,
             text,
             isDone
         } = this.props;
@@ -17,7 +18,7 @@ export default class Todo extends React.Component {
             <li className={Classnames("todo-item", {
                 completed: isDone
             })}>
-                <button className="toggle" onClick={this.toggle}/>
+                <button className="toggle" onClick={() => this.toggle(id)}/>
                 <div className="todo-item__view">
                     <div className="todo-item__view__text">{text}</div>
                     <button className="todo-item__destroy"/>

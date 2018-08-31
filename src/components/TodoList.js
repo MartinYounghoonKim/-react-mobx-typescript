@@ -14,6 +14,7 @@ export default class TodoList extends React.Component {
                     {TodoStore.todos.map(({ id, text, isDone}) => (
                         <Todo
                             key={id}
+                            id={id}
                             text={text}
                             isDone={isDone}
                         />
