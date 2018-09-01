@@ -15,6 +15,10 @@ class TodoStore {
             }
         });
     };
+    @action deleteTodo = (id) => {
+        const targetIndex = this.todos.findIndex(v => v.id === id);
+        this.todos.splice(targetIndex, 1);
+    };
 
     @computed get todoCount () {
         return this.todos.length;
