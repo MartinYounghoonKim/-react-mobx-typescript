@@ -8,6 +8,10 @@ export default class Todo extends React.Component {
     toggle = (targetId) => {
         this.props.TodoStore.toggle(targetId);
     };
+    deleteTodo = (targetId) => {
+        this.props.TodoStore.deleteTodo(targetId);
+    };
+
     render () {
         const {
             id,
@@ -21,7 +25,7 @@ export default class Todo extends React.Component {
                 <button className="toggle" onClick={() => this.toggle(id)}/>
                 <div className="todo-item__view">
                     <div className="todo-item__view__text">{text}</div>
-                    <button className="todo-item__destroy"/>
+                    <button className="todo-item__destroy" onClick={() => this.deleteTodo(id)}/>
                 </div>
                 <input
                     type="text"

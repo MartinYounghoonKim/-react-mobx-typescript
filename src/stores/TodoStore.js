@@ -1,19 +1,35 @@
 import { observable, action, computed } from 'mobx';
-
+import { ajaxGet, ajaxPost, ajaxPut, ajaxDelete } from '../api/todo.api';
 class TodoStore {
     @observable todos = [];
 
+    @action fetchTodos = () => {
+        ajaxGet().then(res => {
+            this.todos = res.data;
+        });
+    };
     @action addTodos = (text) => {
-        const id = new Date().getTime();
-        const isDone = false;
-        this.todos.push({ id, text, isDone });
+        ajaxPost({ text })
+            .then(res => {
+                this.todos.push(res.data);
+            });
     };
     @action toggle = (id) => {
-        this.todos.map(v => {
-            if (v.id === id) {
-                v.isDone = !v.isDone;
-            }
-        });
+        const targetIndex = this.todos.findIndex(v => v.id === id);
+        const targetTodo = this.todos.filter(v => v.id === id)[0];
+        const isDone = !targetTodo.isDone;
+        ajaxPut({ id, isDone })
+            .then(res => {
+                this.todos.splice(targetIndex, 1, res.data);
+            })
+
+    };
+    @action deleteTodo = (id) => {
+        const targetIndex = this.todos.findIndex(v => v.id === id);
+        ajaxDelete(id)
+            .then(() => {
+                this.todos.splice(targetIndex, 1);
+            });
     };
 
     @computed get todoCount () {
