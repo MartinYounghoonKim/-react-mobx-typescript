@@ -8,8 +8,9 @@ export default class Header extends React.Component {
     createTodoItem = (e) => {
         const ENTER_KEYCODE = 13;
         const value = this.inputElement.value;
+        const isAbleAddStatus = e.keyCode === ENTER_KEYCODE && value.length > 0;
 
-        if (e.keyCode === ENTER_KEYCODE && value.length > 0) {
+        if (isAbleAddStatus) {
             this.props.TodoStore.addTodos(value);
             e.target.value = '';
         }

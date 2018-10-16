@@ -16,12 +16,17 @@ export default class Todo extends React.Component {
         const {
             id,
             text,
-            isDone
+            isDone,
+            editingId,
+            setEditingId
         } = this.props;
         return (
             <li className={Classnames("todo-item", {
-                completed: isDone
-            })}>
+                    completed: isDone,
+                    editing: editingId === id
+                })}
+                onDoubleClick={() => setEditingId(id)}
+            >
                 <button className="toggle" onClick={() => this.toggle(id)}/>
                 <div className="todo-item__view">
                     <div className="todo-item__view__text">{text}</div>
