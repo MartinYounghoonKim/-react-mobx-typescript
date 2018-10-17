@@ -40,7 +40,8 @@ export function ajaxPost (payload) {
 
 export function ajaxPut (payload) {
     return new Promise((resolve, reject) => {
-        axios.post('http://localhost:2403/todos/', payload)
+        const { id, text } = payload
+        axios.put(`http://localhost:2403/todos/${id}`, { text })
             .then(res => {
                 if (res.status === 200) {
                     resolve({

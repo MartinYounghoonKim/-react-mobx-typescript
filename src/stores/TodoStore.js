@@ -32,6 +32,14 @@ class TodoStore {
             });
     };
 
+    @action updateTodo = (payload) => {
+        ajaxPut(payload)
+            .then((res) => {
+                const targetIndex = this.todos.findIndex(v => v.id === payload.id);
+                this.todos.splice(targetIndex, 1, res.data);
+            });
+    };
+
     @computed get todoCount () {
         return this.todos.length;
     }

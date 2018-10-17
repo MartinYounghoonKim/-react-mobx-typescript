@@ -18,6 +18,11 @@ export default class TodoList extends React.Component {
             editingId: val
         });
     };
+    unsetEditingID = () => {
+        this.setState({
+            editingId: undefined
+        });
+    };
 
     render() {
         const {
@@ -37,6 +42,7 @@ export default class TodoList extends React.Component {
                             text={text}
                             isDone={isDone}
                             setEditingId={this.setEditingId}
+                            unsetEditingId={this.unsetEditingID}
                         />
                     ))}
                 </ul>
